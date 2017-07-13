@@ -1,9 +1,9 @@
 #!/bin/sh
 
-character=$1
+word=$1
 path=$2
-echo "##### FINDING CHARACTER '$character' #####"
-results=$(grep -l $character $path/*)
+echo "##### FINDING '$word' #####"
+results=$(grep -l $word $path/*)
 
 for filename in $results
 do
