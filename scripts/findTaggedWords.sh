@@ -1,9 +1,9 @@
 #!/bin/sh
+source path.sh
 
 selected_tag=$1
-tags_path=$2
-source_path=$3
-
+tags_path=$tags_path
+source_path=$texts_path
 
 ## check if tah path is valid
 if [ ! -f "$tags_path" ];then
@@ -16,13 +16,14 @@ all_keys=$(jq 'keys|.[]' $tags_path)
 search_tag=""
 for key in $all_keys
 do
-
   clean_key=$(echo $key | tr -d '"')
   object=$(jq .''$key'' $tags_path)
   clean_object=$(echo $object | tr -d '"')
+  sanitized_object=$(echo $clean_object | sed 's@[]\[\()\{}]@__@g')
+
   if [ $clean_key = $selected_tag ]
   then
-    search_tag="$clean_object"
+    search_tag="$sanitized_object"
   fi
 done
 
@@ -32,25 +33,24 @@ if [ -z "$search_tag" ];then
 fi
 
 ##removing all occurrences of every single tag
+all_text=$(cat $source_path/*)
 for key in $all_keys
 do
+
     clean_key=$(echo $key | tr -d '"')
     if [  $clean_key = $selected_tag ]; then
-        echo "continue" $key $selected_tag
         continue
     fi
     clean_key=$(echo $key | tr -d '"')
     object=$(jq .''$key'' $tags_path)
     clean_object=$(echo $object | tr -d '"')
-    echo "removing all occurrences of" $clean_object
-
-    all_text=$(cat $source_path/* |  sed "s/$clean_object//g")
-
-    echo $all_text
+    sanitized_object=$(echo $clean_object | sed 's@[]\[\()\{}]@__@g')
+    sanitized_text=$(echo $all_text | sed 's@[]\[\()\{}]@__@g')
+    all_text=$(echo $sanitized_text | sed "s/$sanitized_object//g")
 done
-exit 1
 
-results=$(grep -oh $search_tag'.\w*' $source_path/*)
+
+results=$(echo $all_text | grep -oh $search_tag'.\w*')
 
 if [ -z "$results" ]; then
     echo "ERROR: results are empty"
@@ -59,20 +59,8 @@ fi
 
 for occurrence in $results
 do
-    word=$occurrence
-    for key in $all_keys
-    do
-    clean_key=$(echo $key | tr -d '"')
-    object=$(jq .''$key'' $tags_path)
-    clean_object=$(echo $object | tr -d '"')
-echo "deleting .." $clean_object "from" $word
-
-    word=$(echo $word | sed "s@clean_object@@g")
-echo $word
-    done
-
-
-#echo $word
+    occurrence=$(echo $occurrence | sed "s@$search_tag@@g")
+    echo $occurrence
 done
 
 exit 0

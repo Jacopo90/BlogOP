@@ -1,7 +1,8 @@
 #!/bin/sh
+source path.sh
 
-source_path=$3
-json_file=$2
+source_path=$texts_path
+json_file=$structure_path
 key_list=$1
 
 list=$(jq .''$key_list'|.[]' $json_file)
