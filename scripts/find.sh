@@ -10,3 +10,4 @@ do
   clean_name=$(echo $name | tr -d '"')
   sh findWord.sh $clean_name $source_path
 done
+
