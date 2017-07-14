@@ -17,6 +17,13 @@ do
    search_tag="$clean_object" 
   fi
 done
-results=$(grep -l "$search_tag*" $source_path/*)
 
+results=$(grep -wo $search_tag'\w*' $source_path/*)
 
+final_list=[]
+for occurrence in $results
+do
+ word=$(echo $occurrence | sed "s@.*$search_tag@@g")
+done
+
+echo $final_list
