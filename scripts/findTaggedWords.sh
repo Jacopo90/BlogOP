@@ -57,10 +57,16 @@ if [ -z "$results" ]; then
     exit 1
 fi
 
+result_set=()
+i=0
 for occurrence in $results
 do
-    occurrence=$(echo $occurrence | sed "s@$search_tag@@g")
-    echo $occurrence
+    occurrence=$(echo $occurrence | sed "s@$search_tag@@g" | tr '[:upper:]' '[:lower:]' )
+    result_set[$i]=$occurrence
+    (( i ++ ))
 done
 
+##rmoving duplicates
+set=$(echo ${result_set[@]} | tr ' ' '\n' | sort -u)
+history -p "${set[@]}"
 exit 0
