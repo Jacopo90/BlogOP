@@ -5,14 +5,20 @@ selected_tag=$1
 tags_path=$tags_path
 source_path=$texts_path
 
-## check if tah path is valid
+## check if tag is not null
+if [ ! "$selected_tag" ];then
+    echo "ERROR: no tag provided"
+    exit 1
+fi
+
+## check if tag path is valid
 if [ ! -f "$tags_path" ];then
     echo "ERROR: tags path is not valid"
     exit 1
 fi
 
+## getting selected object from json
 all_keys=$(jq 'keys|.[]' $tags_path)
-
 search_tag=""
 for key in $all_keys
 do
@@ -27,12 +33,13 @@ do
   fi
 done
 
+## check if tag is not null
 if [ -z "$search_tag" ];then
     echo "ERROR: no tag found"
     exit 1
 fi
 
-##removing all occurrences of every single tag
+## removing all occurrences of every single tag
 all_text=$(cat $source_path/*)
 for key in $all_keys
 do
@@ -49,7 +56,7 @@ do
     all_text=$(echo $sanitized_text | sed "s/$sanitized_object//g")
 done
 
-
+## searching..
 results=$(echo $all_text | grep -oh $search_tag'.\w*')
 
 if [ -z "$results" ]; then
@@ -57,6 +64,7 @@ if [ -z "$results" ]; then
     exit 1
 fi
 
+## filling array and set lower case
 result_set=()
 i=0
 for occurrence in $results
@@ -66,7 +74,7 @@ do
     (( i ++ ))
 done
 
-##rmoving duplicates
+## removing duplicates
 set=$(echo ${result_set[@]} | tr ' ' '\n' | sort -u)
 history -p "${set[@]}"
 exit 0
