@@ -3,7 +3,7 @@
 word=$1
 path=$2
 echo "##### FINDING '$word' #####"
-results=$(grep -l $word $path/*)
+results=$(grep -il $word $path/*)
 
 for filename in $results
 do

@@ -4,6 +4,7 @@ source path.sh
 selected_tag=$1
 tags_path=$tags_path
 source_path=$texts_path
+structure_path=$structure_path
 
 ## check if tag is not null
 if [ ! "$selected_tag" ];then
@@ -76,5 +77,27 @@ done
 
 ## removing duplicates
 set=$(echo ${result_set[@]} | tr ' ' '\n' | sort -u)
-history -p "${set[@]}"
+
+#history -p "${set[@]}" ##printing data
+
+
+## updating structure
+## to do add a condition for this
+## add quotes..
+j=0
+result_word_set=()
+
+for word in $set
+do
+    w="\"$word\""
+    result_word_set[$j]=$w
+    (( j ++ ))
+done
+## building a string from the array
+result=$(printf "%s,"  ${result_word_set[*]})
+result=${result%?}
+final_json=$(jq '."'${selected_tag}'" |= ['$result']'  $structure_path)
+echo $final_json > $structure_path
 exit 0
+
+
