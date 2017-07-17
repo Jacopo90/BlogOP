@@ -1,1 +1,28 @@
-{ "marina": [ "albida", "kobi", "sengoku" ], "devil_fruit": [ "gomgom" ], "mugiwara": [ "brook", "chopper", "nami", "rufy", "sanji", "zoro" ], "pirates": [ "albida", "bagy", "kabaji", "rufy", "zoro" ], "shiki": [ "shanks" ] }
+{
+  "devil_fruit": [
+    "gomgom"
+  ],
+  "marina": [
+    "albida",
+    "kobi",
+    "sengoku"
+  ],
+  "mugiwara": [
+    "brook",
+    "chopper",
+    "nami",
+    "rufy",
+    "sanji",
+    "zoro"
+  ],
+  "pirates": [
+    "albida",
+    "bagy",
+    "kabaji",
+    "rufy",
+    "zoro"
+  ],
+  "shiki": [
+    "shanks"
+  ]
+}

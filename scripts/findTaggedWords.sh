@@ -80,7 +80,6 @@ set=$(echo ${result_set[@]} | tr ' ' '\n' | sort -u)
 
 #history -p "${set[@]}" ##printing data
 
-
 ## updating structure
 ## to do add a condition for this
 ## add quotes..
@@ -96,8 +95,8 @@ done
 ## building a string from the array
 result=$(printf "%s,"  ${result_word_set[*]})
 result=${result%?}
-final_json=$(jq '."'${selected_tag}'" |= ['$result']'  $structure_path)
-echo $final_json > $structure_path
+final_json=$(jq -c '."'${selected_tag}'" |= ['$result']'  $structure_path)
+jq . <<< ${final_json} > $structure_path
 exit 0
 
 
