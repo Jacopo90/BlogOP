@@ -9,6 +9,6 @@ list=$(jq .''$key_list'|.[]' $json_file)
 for name in $list
 do
   clean_name=$(echo $name | tr -d '"')
-  sh findWord.sh $clean_name $source_path
+  sh find_word.sh $clean_name $source_path
 done
 

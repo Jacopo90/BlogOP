@@ -2,7 +2,7 @@
   "devil_fruit": [
     "gomgom"
   ],
-  "marina": [
+  "marine": [
     "albida",
     "kobi",
     "sengoku"
@@ -18,11 +18,15 @@
   "pirates": [
     "albida",
     "bagy",
+    "barbabianca",
     "kabaji",
     "rufy",
     "zoro"
   ],
   "shiki": [
     "shanks"
+  ],
+  "emperor": [
+    "barbabianca"
   ]
 }

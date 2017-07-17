@@ -20,18 +20,23 @@ fi
 
 ## getting selected object from json
 all_keys=$(jq 'keys|.[]' $tags_path)
-search_tag=""
+
+## removing all occurrences of every single tag and setting the search_tag
+all_text=$(find $source_path -name '*.txt' -exec cat {} \;)
+
 for key in $all_keys
 do
-  clean_key=$(echo $key | tr -d '"')
-  object=$(jq .''$key'' $tags_path)
-  clean_object=$(echo $object | tr -d '"')
-  sanitized_object=$(echo $clean_object | sed 's@[]\[\()\{}]@__@g')
+    clean_key=$(echo $key | tr -d '"')
+    object=$(jq .''$key'' $tags_path)
+    clean_object=$(echo $object | tr -d '"')
+    sanitized_object=$(echo $clean_object | sed 's@[]\[\()\{}]@__@g')
+    if [  $clean_key = $selected_tag ]; then
+        search_tag="$sanitized_object"
+        continue
+    fi
+    sanitized_text=$(echo $all_text | sed 's@[]\[\()\{}]@__@g')
+    all_text=$(echo $sanitized_text | sed "s/$sanitized_object//g")
 
-  if [ $clean_key = $selected_tag ]
-  then
-    search_tag="$sanitized_object"
-  fi
 done
 
 ## check if tag is not null
@@ -39,23 +44,6 @@ if [ -z "$search_tag" ];then
     echo "ERROR: no tag found"
     exit 1
 fi
-
-## removing all occurrences of every single tag
-all_text=$(cat $source_path/*)
-for key in $all_keys
-do
-
-    clean_key=$(echo $key | tr -d '"')
-    if [  $clean_key = $selected_tag ]; then
-        continue
-    fi
-    clean_key=$(echo $key | tr -d '"')
-    object=$(jq .''$key'' $tags_path)
-    clean_object=$(echo $object | tr -d '"')
-    sanitized_object=$(echo $clean_object | sed 's@[]\[\()\{}]@__@g')
-    sanitized_text=$(echo $all_text | sed 's@[]\[\()\{}]@__@g')
-    all_text=$(echo $sanitized_text | sed "s/$sanitized_object//g")
-done
 
 ## searching..
 results=$(echo $all_text | grep -oh $search_tag'.\w*')
@@ -75,28 +63,13 @@ do
     (( i ++ ))
 done
 
+#echo ${result_set[@]}
+
 ## removing duplicates
 set=$(echo ${result_set[@]} | tr ' ' '\n' | sort -u)
 
-#history -p "${set[@]}" ##printing data
+history -p "${set[@]}" ##printing data
 
-## updating structure
-## to do add a condition for this
-## add quotes..
-j=0
-result_word_set=()
-
-for word in $set
-do
-    w="\"$word\""
-    result_word_set[$j]=$w
-    (( j ++ ))
-done
-## building a string from the array
-result=$(printf "%s,"  ${result_word_set[*]})
-result=${result%?}
-final_json=$(jq -c '."'${selected_tag}'" |= ['$result']'  $structure_path)
-jq . <<< ${final_json} > $structure_path
 exit 0
 
 

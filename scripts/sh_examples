@@ -1,2 +1,3 @@
-sh find.sh "characters"
-sh findTaggedWords.sh mugi
+sh po_chain.sh
+sh find_tagged_words.sh marine
+sh find marine
