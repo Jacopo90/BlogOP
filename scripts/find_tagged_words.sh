@@ -3,8 +3,15 @@ source path.sh
 
 selected_tag=$1
 tags_path=$tags_path
-source_path=$texts_path
 structure_path=$structure_path
+
+if [[ $2 ]]; then
+    source_path=$2
+else
+    source_path=$texts_path
+fi
+
+output_path=$3
 
 ## check if tag is not null
 if [ ! "$selected_tag" ];then
@@ -49,7 +56,6 @@ fi
 results=$(echo $all_text | grep -oh $search_tag'.\w*')
 
 if [ -z "$results" ]; then
-    echo "ERROR: results are empty"
     exit 1
 fi
 
@@ -68,8 +74,12 @@ done
 ## removing duplicates
 set=$(echo ${result_set[@]} | tr ' ' '\n' | sort -u)
 
-history -p "${set[@]}" ##printing data
-
+if [[ $output_path ]]
+    then
+        history -p "${set[@]}" > $output_path
+    else
+        history -p "${set[@]}" 
+fi
 exit 0
 
 
