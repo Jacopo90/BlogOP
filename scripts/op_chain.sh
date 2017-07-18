@@ -29,7 +29,7 @@ do
     if [ -z "$set" ]; then
         continue
     fi
-## every result will be saved in the structure.json file
+## every result will be saved in the selected output file
 ## start
     j=0
     result_word_set=()
@@ -44,12 +44,10 @@ do
     result=$(printf "%s,"  ${result_word_set[*]})
     result=${result%?}
     final_json=$(jq -c '."'$clean_key'" |= ['$result']'  $output_path)
-    ## saving in structure.json file
+    ## saving in the selected output file
     jq . <<< ${final_json} > $output_path
 ## end
-
     #   sh find.sh $key
-
 done
 
     jq .  $output_path
