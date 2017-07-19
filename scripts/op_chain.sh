@@ -1,4 +1,31 @@
 #!/bin/sh
+## author : Jacopo Pappalettera
+## edited : 19/07/2017
+## This script prints a json with all the values found from every tag set
+## example:
+## {
+##  "tag0": [
+##    "value1"
+##  ],
+##  "tag1": [
+##    "value2",
+##    "value3",
+##    "value4"
+##  ],
+##  "tag2": [
+##    "value12",
+##    "value2",
+##    "value4",
+##    "value3",
+##    "value4",
+##    "value2"
+##  ]
+## }
+## you can pass in input the source folder
+## and also a destination file
+## If you don't pass anything the default path will be taken from path.sh file
+##
+
 source path.sh
 
 tags_path=$tags_path
