@@ -16,7 +16,6 @@ source path.sh
 
 selected_tag=$1
 tags_path=$tags_path
-structure_path=$structure_path
 
 if [[ $2 ]]; then
     source_path=$2

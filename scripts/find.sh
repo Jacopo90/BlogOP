@@ -2,6 +2,7 @@
 ## author : Jacopo Pappalettera
 ## edited : 19/07/2017
 ## Takes every values from a json file and pass it to the find.sh script
+## Is this script can be useful???
 
 source path.sh
 
