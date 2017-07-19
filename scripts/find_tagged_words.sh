@@ -1,4 +1,17 @@
 #!/bin/sh
+## author : Jacopo Pappalettera
+## edited : 19/07/2017
+## This scripts prints a list of values tagged with the specified value
+## example: 
+## sh find_tagged_words.sh tag
+## value1
+## value2 
+## value3
+## you can pass in input the source folder
+## and also a destination file
+## If you don't pass anything the default path will be taken from path.sh file
+## If you don't pass a destination file this script prints in the terminal the output without writing any file
+
 source path.sh
 
 selected_tag=$1

@@ -2,6 +2,7 @@
 ## author : Jacopo Pappalettera
 ## edited : 19/07/2017
 ## This script prints a json with all the values found from every tag set
+## sh op_chain.sh
 ## example:
 ## {
 ##  "tag0": [
@@ -24,7 +25,6 @@
 ## you can pass in input the source folder
 ## and also a destination file
 ## If you don't pass anything the default path will be taken from path.sh file
-##
 
 source path.sh
 

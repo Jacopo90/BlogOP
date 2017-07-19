@@ -1,4 +1,7 @@
 #!/bin/sh
+## author : Jacopo Pappalettera
+## edited : 19/07/2017
+## Finds a specified avery occurrence of the specified word in the source folders
 
 word=$1
 path=$2
