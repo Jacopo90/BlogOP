@@ -1,7 +1,7 @@
 #!/bin/sh
 ## author : Jacopo Pappalettera
 ## edited : 19/07/2017
-
+## Generates a stat file for the selected folder
 
 source path.sh
 
