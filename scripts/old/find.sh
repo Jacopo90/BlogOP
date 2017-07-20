@@ -7,13 +7,15 @@
 source path.sh
 
 source_path=$texts_path
-json_file=$structure_path
 key_list=$1
+json_file=$2
 
 list=$(jq .''$key_list'|.[]' $json_file)
 for name in $list
 do
-  clean_name=$(echo $name | tr -d '"')
-  sh find_word.sh $clean_name $source_path
+	clean_name=$(echo $name | tr -d '"' | tr -d ',' )
+	if [[ ${#clean_name} > 1 ]]; then
+		sh find_word.sh $clean_name $source_path
+	fi
 done
 

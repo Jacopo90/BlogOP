@@ -1,6 +1,6 @@
 #!/bin/sh
 ## author : Jacopo Pappalettera
-## edited : 19/07/2017
+## edited : 20/07/2017
 ## This script prints a json with all the values found from every tag set
 ## sh op_chain.sh
 ## example:
@@ -36,12 +36,12 @@ else
     source_path=$texts_path
 fi
 
-if [[ $2 ]]; then
-    output_path=$2
-else
-    output_path=$structure_path
+output_path=$2
+if [[ ! $output_path ]]
+then
+    echo "ERROR: no output file provided"
+    exit 1 
 fi
-
 ##  check file is empty and if not filling it
 if [[ ! -s $output_path ]]
 then
@@ -72,12 +72,8 @@ do
     result=${result%?}
     final_json=$(jq -c '."'$clean_key'" |= ['$result']'  $output_path)
     ## saving in the selected output file
-    jq . <<< ${final_json} > $output_path
-## end
-    #   sh find.sh $key
+     jq . <<< ${final_json} > $output_path
+    ## end
 done
-
-    jq .  $output_path
-
 exit 0;
 
