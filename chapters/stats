@@ -1,6 +1,7 @@
 {
   "devil_fruit": [
-    "gomgom"
+    "gomgom",
+    "lamalama"
   ],
   "marine": [
     "albida",
@@ -10,7 +11,9 @@
   "mugiwara": [
     "brook",
     "chopper",
+    "franky",
     "nami",
+    "nicorobin",
     "rufy",
     "sanji",
     "zoro"
@@ -18,12 +21,18 @@
   "pirates": [
     "albida",
     "bagy",
+    "franky",
     "kabaji",
     "law",
+    "nicorobin",
     "rufy",
     "zoro"
   ],
   "shiki": [
     "shanks"
+  ],
+  "emperor": [
+    "barbabianca",
+    "bigmom"
   ]
 }

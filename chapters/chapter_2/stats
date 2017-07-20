@@ -1,12 +1,19 @@
 {
-  "mugiwara": [
-    "rufy"
-  ],
-  "pirates": [
-    "bagy",
-    "law"
-  ],
   "marine": [
     "sengoku"
+  ],
+  "pirates": [
+    "albida",
+    "bagy",
+    "kabaji",
+    "law",
+    "rufy",
+    "zoro"
+  ],
+  "emperor": [
+    "bigmom"
+  ],
+  "mugiwara": [
+    "zoro"
   ]
 }
