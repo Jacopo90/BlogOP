@@ -29,19 +29,6 @@ fi
 
 all_files=$(find $source_path -type f)
 
-#updating stats file 
-all_directories=()
-i=0
-for file_path in $all_files; do
-	BASEDIR=$(dirname $file_path)
-	all_directories[$i]=$BASEDIR
-    (( i ++ ))
-done 
-dir_set=$(echo ${all_directories[@]} | tr ' ' '\n' | sort -u)
-for dir in $dir_set; do
-	sh update_stats.sh $dir
-done 
-
 ## founding relations in all files
 for file_path in $all_files; do
 	# check if file name is equal to the default stats file name

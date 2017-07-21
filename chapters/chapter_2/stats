@@ -1,6 +1,12 @@
 {
+  "emperor": [
+    "bigmom"
+  ],
   "marine": [
     "sengoku"
+  ],
+  "mugiwara": [
+    "zoro"
   ],
   "pirates": [
     "albida",
@@ -8,12 +14,6 @@
     "kabaji",
     "law",
     "rufy",
-    "zoro"
-  ],
-  "emperor": [
-    "bigmom"
-  ],
-  "mugiwara": [
     "zoro"
   ]
 }
