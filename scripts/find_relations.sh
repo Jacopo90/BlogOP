@@ -44,7 +44,8 @@ for file_path in $all_files; do
 			## cycling all values in the stats file json
 			for name in $list; do
   				clean_name=$(echo $name | tr -d '"' | tr -d ',')
-  				if [[ ${#clean_name} > 1 && "$clean_name" = "$search_key" ]]; then
+                lower_case_search_key_name=$(echo $search_key | tr '[:upper:]' '[:lower:]')
+                if [[ ${#clean_name} > 1 && "$clean_name" = "$lower_case_search_key_name" ]];then
   					found=true
   					break
 					else
