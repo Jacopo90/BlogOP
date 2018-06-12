@@ -3,7 +3,7 @@
 ## edited : 21/07/2017
 ## Takes every values from a json file with a specified tag name! and pass it to the find.sh script
 
-source path.sh
+source $(dirname $0)/path.sh
 
 source_path=$texts_path
 key_list=$1

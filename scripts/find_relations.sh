@@ -3,7 +3,7 @@
 ## edited : 20/07/2017
 ## 
 
-source path.sh
+source $(dirname $0)/path.sh
 
 stat_file_name=$default_stat_file_name
 if [[ "$1" = "--default" ]]; then
@@ -22,20 +22,24 @@ do
   (( j ++ ))
 done
 
+
 if [ -z "$arg_set" ]; then
 	echo "ERROR: no search keys"
     exit 1
 fi
 
-all_files=$(find $source_path -type f)
+
+all_files=`find -f $source_path`
+echo $all_files
 
 ## founding relations in all files
 for file_path in $all_files; do
+
 	# check if file name is equal to the default stats file name
 	file_name=$(basename $file_path)
 	if [[ "$file_name" = "$stat_file_name" ]]; then
-
 		found_relation=false
+
 		for search_key in ${arg_set[@]}; do
 			found=false
 			## prints all values of the json file
@@ -44,8 +48,7 @@ for file_path in $all_files; do
 			## cycling all values in the stats file json
 			for name in $list; do
   				clean_name=$(echo $name | tr -d '"' | tr -d ',')
-                lower_case_search_key_name=$(echo $search_key | tr '[:upper:]' '[:lower:]')
-                if [[ ${#clean_name} > 1 && "$clean_name" = "$lower_case_search_key_name" ]];then
+  				if [[ ${#clean_name} > 1 && "$clean_name" = "$search_key" ]]; then
   					found=true
   					break
 					else
@@ -66,4 +69,5 @@ for file_path in $all_files; do
 		fi
 	fi
 done
+
 exit 0

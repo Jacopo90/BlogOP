@@ -3,7 +3,7 @@
 ## edited : 21/07/2017
 ## Generates a stat file for the selected folder
 
-source path.sh
+source $(dirname $0)/path.sh
 
 if [[ $1 ]]; then
     source_path=$1

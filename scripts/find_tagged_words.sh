@@ -12,7 +12,7 @@
 ## If you don't pass anything the default path will be taken from path.sh file
 ## If you don't pass a destination file this script prints in the terminal the output without writing any file
 
-source path.sh
+source $(dirname $0)/path.sh
 
 selected_tag=$1
 tags_path=$tags_path

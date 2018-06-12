@@ -3,7 +3,7 @@
 ## edited : 21/07/2017
 ## update all stats recursively from $texts_path
 
-source path.sh
+source $(dirname $0)/path.sh
 
 source_path=$texts_path
 all_files=$(find $source_path -type f)

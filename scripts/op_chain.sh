@@ -26,7 +26,7 @@
 ## and also a destination file
 ## If you don't pass anything the default path will be taken from path.sh file
 
-source path.sh
+source $(dirname $0)/path.sh
 
 tags_path=$tags_path
 
